@@ -148,6 +148,17 @@
 ;;----------------------------------------------------------------------------
 (require 'init-local nil t)
 
+;;----------------------------------------------------------------------------
+;; jenenliu's personal configuration
+;;----------------------------------------------------------------------------
+(require 'init-auto-save)
+(require 'init-w3m)
+(require 'init-hidden-mode)
+(require 'init-golang)
+(require 'init-speedbar)
+(require 'init-local)
+(require 'init-tabbar)
+(require 'init-key)
 
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)

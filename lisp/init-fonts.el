@@ -6,7 +6,7 @@
 (require-package 'default-text-scale)
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
-
+(set-default-font "Monaco 13")
 
 (defun sanityinc/maybe-adjust-visual-fill-column ()
   "Readjust visual fill column when the global font size is modified.
