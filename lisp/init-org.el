@@ -1,7 +1,5 @@
-(maybe-require-package 'org-fstree)
 (when *is-a-mac*
-  (maybe-require-package 'grab-mac-link)
-  (require-package 'org-mac-iCal))
+  (maybe-require-package 'grab-mac-link))
 
 (maybe-require-package 'org-cliplink)
 
@@ -23,6 +21,7 @@
 
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html
 
+;; TODO: fail gracefully
 (defun sanityinc/grab-ditaa (url jar-name)
   "Download URL and extract JAR-NAME as `org-ditaa-jar-path'."
   ;; TODO: handle errors
@@ -47,6 +46,15 @@
       (unless (file-exists-p org-ditaa-jar-path)
         (sanityinc/grab-ditaa url jar-name)))))
 
+(after-load 'ob-plantuml
+  (let ((jar-name "plantuml.jar")
+        (url "http://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar"))
+    (setq org-plantuml-jar-path (expand-file-name jar-name (file-name-directory user-init-file)))
+    (unless (file-exists-p org-plantuml-jar-path)
+      (url-copy-file url org-plantuml-jar-path))))
+
+
+
 
 
 (maybe-require-package 'writeroom-mode)
@@ -70,12 +78,16 @@ typical word processor."
         ;;(delete-selection-mode 1)
         (set (make-local-variable 'blink-cursor-interval) 0.6)
         (set (make-local-variable 'show-trailing-whitespace) nil)
+        (set (make-local-variable 'line-spacing) 0.2)
+        (set (make-local-variable 'electric-pair-mode) nil)
         (ignore-errors (flyspell-mode 1))
         (visual-line-mode 1))
     (kill-local-variable 'truncate-lines)
     (kill-local-variable 'word-wrap)
     (kill-local-variable 'cursor-type)
     (kill-local-variable 'show-trailing-whitespace)
+    (kill-local-variable 'line-spacing)
+    (kill-local-variable 'electric-pair-mode)
     (buffer-face-mode -1)
     ;; (delete-selection-mode -1)
     (flyspell-mode -1)
@@ -93,7 +105,7 @@ typical word processor."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-capture-templates
-      `(("t" "todo" entry (file "")  ; "" => org-default-notes-file
+      `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
          "* NEXT %?\n%U\n" :clock-resume t)
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
@@ -296,18 +308,6 @@ typical word processor."
 
 
 
-;; Remove empty LOGBOOK drawers on clock out
-(defun sanityinc/remove-empty-drawer-on-clock-out ()
-  (interactive)
-  (save-excursion
-    (beginning-of-line 0)
-    (org-remove-empty-drawer-at "LOGBOOK" (point))))
-
-(after-load 'org-clock
-  (add-hook 'org-clock-out-hook 'sanityinc/remove-empty-drawer-on-clock-out 'append))
-
-
-
 ;; TODO: warn about inconsistent items, e.g. TODO inside non-PROJECT
 ;; TODO: nested projects!
 
@@ -368,6 +368,7 @@ typical word processor."
      (ledger . t)
      (ocaml . nil)
      (octave . t)
+     (plantuml . t)
      (python . t)
      (ruby . t)
      (screen . nil)
