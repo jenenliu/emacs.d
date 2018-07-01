@@ -169,13 +169,13 @@
 ;; jenenliu's personal configuration
 ;;----------------------------------------------------------------------------
 (require 'init-auto-save)
-(require 'init-w3m)
+;; (require 'init-w3m)
 (require 'init-hidden-mode)
-(require 'init-golang)
-(require 'init-speedbar)
-(require 'init-local)
-(require 'init-tabbar)
-(require 'init-key)
+;; (require 'init-golang)
+;; (require 'init-speedbar)
+;; (require 'init-local)
+;; (require 'init-tabbar)
+;; (require 'init-key)
 
 ;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "init-local" containing personal settings

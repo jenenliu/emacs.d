@@ -1,9 +1,9 @@
 ;;; Changing font sizes
 
 (require-package 'default-text-scale)
-;;(global-set-key (kbd "C-M-=") 'default-text-scale-increase)
+;; (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 ;;(global-set-key (kbd "C-M--") 'default-text-scale-decrease)
-;;(set-default-font "Monaco 13")
+;; (set-default-font "Monaco 13")
 (add-hook 'after-init-hook 'default-text-scale-mode)
 
 

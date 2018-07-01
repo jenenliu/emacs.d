@@ -1,9 +1,13 @@
 ;;; package --- Summary
 ;;; Commentary:
 (require 'lazy-set-key)
-(require 'w3m)
+(require-package 'w3m)
+
+(defvar w3m-mode-map (make-sparse-keymap)
+  "w3m mode's keymap.")
 
 ;;; Code:
+(lazy-set-autoload-key '(("C-z C-z" . w3m)) "init-w3m")
 (setq browse-url-browser-function 'w3m-browse-url)
 (setq browse-url-new-window-flag t)
 (setq w3m-make-new-session t)

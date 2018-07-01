@@ -81,9 +81,11 @@
 
 ;;; Require
 
-(require 'speedbar)
-(require 'sr-speedbar)
+(require-package 'speedbar)
+(require-package 'sr-speedbar)
 
+(defvar speedbar-mode-map (make-sparse-keymap)
+  "speedbar mode's keymap.")
 ;;; Code:
 
 (setq speedbar-show-unknown-files t)    ;显示文件

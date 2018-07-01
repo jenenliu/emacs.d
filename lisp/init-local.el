@@ -33,4 +33,11 @@
   (beginning-of-line)
   (open-line 1))
 
+;; (defun other-window-backward ()
+;; "Select the previous window."
+;; (interactive)
+;; (other-window -1))
+
+(global-set-key "\C-x\C-p" 'other-window-backward)
+
 (provide 'init-local)
